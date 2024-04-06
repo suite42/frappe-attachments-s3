@@ -8,7 +8,7 @@ app_publisher = "Frappe"
 app_description = "Frappe app to make file upload to S3 through attach file option."
 app_icon = "octicon octicon-file-directory"
 app_color = "grey"
-app_email = "ramesh.ravi@zerodha.com"
+app_email = "crm@ssuite42.in"
 app_license = "MIT"
 
 # Includes in <head>
@@ -16,7 +16,7 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/frappe_s3_attachment/css/frappe_s3_attachment.css"
-# app_include_js = "/assets/frappe_s3_attachment/js/frappe_s3_attachment.js"
+app_include_js = "custom_form.bundle.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/frappe_s3_attachment/css/frappe_s3_attachment.css"
