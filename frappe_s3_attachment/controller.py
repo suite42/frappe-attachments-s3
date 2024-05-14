@@ -376,7 +376,8 @@ def public_file_regex_match(file_url):
 def erp_or_s3_file_regex_match(s3_bucket, file_url):
     bucket_url = f"https://s3.ap-south-1.amazonaws.com/{s3_bucket}"
     erp_url = f"{frappe.utils.get_url()}/api/method/frappe_s3_attachment.controller.generate_file"
-    return re.match(rf"^({erp_url}|{bucket_url})", file_url)
+    prod_bucket_url = f"https://s3.ap-south-1.amazonaws.com/suite42-erp-prod"
+    return re.match(rf"^({erp_url}|{bucket_url}|{prod_bucket_url})", file_url)
 
 
 def gdrive_file_regex_match(file_url):
