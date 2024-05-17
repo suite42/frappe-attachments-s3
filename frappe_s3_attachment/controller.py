@@ -98,7 +98,7 @@ class S3Operations(object):
                     + parent_doctype
                     + "/"
                     + key
-                    + "_"
+                    + "/"
                     + file_name
                 )
             else:
@@ -112,12 +112,12 @@ class S3Operations(object):
                     + parent_doctype
                     + "/"
                     + key
-                    + "_"
+                    + "/"
                     + file_name
                 )
             return final_key
         else:
-            final_key = doc_path + "/" + key + "_" + file_name
+            final_key = doc_path + "/" + key + "/" + file_name
             return final_key
 
     def upload_files_to_s3_with_key(
@@ -243,7 +243,6 @@ def file_upload_to_s3(doc, method):
                 try:
                     file_path = wget.download(path, out="/tmp/")
                     file_name = file_path.split("/")[-1]
-                    file_name = uuid.uuid4().hex[:7].upper() + "_" + file_name
                     doc.file_name = file_name
                     doc.is_private = 1
                 except:

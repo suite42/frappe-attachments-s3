@@ -2,6 +2,7 @@ from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 from googleapiclient.http import MediaIoBaseDownload
+import os
 
 import uuid
 
@@ -31,9 +32,10 @@ def download_file_from_gdrive(url):
     service = get_google_service()
     file_id = url.split("/")[-2]
     file_name = service.files().get(fileId=file_id).execute()["name"]
-    file_name = uuid.uuid4().hex[:7].upper() + "_" + file_name
     request = service.files().get_media(fileId=file_id)
-    path = "/tmp/" + file_name
+    folder = "/tmp/{}/".format(uuid.uuid4().hex[:7].upper())
+    os.mkdir(folder)
+    path = folder + file_name
     with open(path, "wb") as f:
         downloader = MediaIoBaseDownload(f, request)
         done = False
