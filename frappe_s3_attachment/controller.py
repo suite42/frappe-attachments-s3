@@ -254,6 +254,7 @@ def file_upload_to_s3(doc, method):
                 file_path = site_path + "/public" + path
             else:
                 file_path = site_path + path
+
         key = s3_upload.upload_files_to_s3_with_key(
             file_path, doc.file_name, doc.is_private, parent_doctype, parent_name
         )
@@ -308,6 +309,16 @@ def get_public_file_url(url):
         return s3_upload.get_url(key, file_name)
     else:
         frappe.throw(_("Unhandled url to get public url"))
+
+
+def get_file_url(key=None, file_name=None):
+    if key:
+        s3_upload = S3Operations()
+        signed_url = s3_upload.get_url(key, file_name)
+    else:
+        frappe.throw(_("Key not found"))
+
+    return {"type": "redirect", "location": signed_url}
 
 
 @frappe.whitelist()
